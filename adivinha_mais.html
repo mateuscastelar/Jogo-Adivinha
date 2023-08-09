@@ -1,0 +1,52 @@
+<meta charset="UTF-8">
+
+<input/>
+<button>Compare com o meu segredo</button>
+
+<script>
+    // Função para sortear um número aleatório de 0 a 10
+    function sorteia() {
+        return Math.round(Math.random() * 10);
+    }
+
+    // Função para sortear um conjunto de números secretos sem repetição
+    function sorteiaNumeros(quantidade) {
+        var segredos = [];
+        while (segredos.length < quantidade) {
+            var numeroAleatorio = sorteia();
+            // Verifica se o número já existe no conjunto de segredos
+            if (segredos.indexOf(numeroAleatorio) === -1) {
+                segredos.push(numeroAleatorio);
+            }
+        }
+        return segredos;
+    }
+
+    var input = document.querySelector("input");
+    input.focus();
+
+    function verifica() {
+        // Chamando a função para sortear novos segredos a cada vez que o jogador clica
+        var segredos = sorteiaNumeros(5);
+        console.log(segredos);
+
+        var achou = false;
+        for (var posicao = 0; posicao < segredos.length; posicao++) {
+            if (input.value == segredos[posicao]) {
+                alert("Você ACERTOU!");
+                achou = true;
+                break;
+            }
+        }
+
+        if (!achou) {
+            alert("Você errou!");
+        }
+
+        input.value = "";
+        input.focus();
+    }
+
+    var button = document.querySelector("button");
+    button.onclick = verifica;
+</script>
